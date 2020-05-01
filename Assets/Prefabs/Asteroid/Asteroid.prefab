@@ -105,7 +105,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 75, y: 75, z: 0}
+  m_Size: {x: 75, y: 75, z: 75}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1411753014264327584
 MonoBehaviour:
@@ -121,7 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroid: {fileID: 1589373309211121228}
   _asteroids: {fileID: 11400000, guid: c1808a60879155440ab5a702537648b2, type: 2}
-  _audioAsteroids: {fileID: 3497103879927766301}
   _asteroidDestroy: {fileID: 8300000, guid: aa3bb4258c6396845aebddcc8045e864, type: 3}
   _shipDestroy: {fileID: 8300000, guid: c601560aa84e3e945962864e00161661, type: 3}
 --- !u!114 &7883749454060757818

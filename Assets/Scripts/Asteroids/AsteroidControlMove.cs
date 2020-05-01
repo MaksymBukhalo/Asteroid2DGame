@@ -11,7 +11,7 @@ public class AsteroidControlMove : MonoBehaviour
 
 	void Start()
 	{
-		_planeSize = GameObject.Find("Game(Clone)").GetComponent<RectTransform>();
+		_planeSize = GameObject.Find("Space").GetComponent<RectTransform>();
 		AddForceAsteroid();
 	}
 
@@ -24,30 +24,32 @@ public class AsteroidControlMove : MonoBehaviour
 	{
 		float asteroidForceX = Random.Range(-5f, 5f);
 		float asteroidForsceY = Random.Range(-5f, 5f);
-		Vector3 vectorForce = new Vector3(asteroidForceX, asteroidForsceY);
+		Vector3 vectorForce = new Vector3(asteroidForceX, asteroidForsceY,0f);
 		_asteroid.GetComponent<Rigidbody>().AddForce(vectorForce * _asteroidForce);
 	}
 
 	private void TeleportsAsteroidOnLimit()
 	{
-		if (_asteroid.transform.position.x > _planeSize.transform.position.x * 2)
+		float sizeScaleX = _planeSize.sizeDelta.x / 2;
+		float sizeScaleY = _planeSize.sizeDelta.y / 2;
+		if (_asteroid.transform.position.x > sizeScaleX)
 		{
-			_asteroid.transform.position = new Vector3(0f, _asteroid.transform.position.y);
+			_asteroid.transform.position = new Vector3(-sizeScaleX, _asteroid.transform.position.y);
 		}
 
-		if (_asteroid.transform.position.x < 0)
+		if (_asteroid.transform.position.x < -sizeScaleX)
 		{
-			_asteroid.transform.position = new Vector3(_planeSize.transform.position.x * 2, _asteroid.transform.position.y);
+			_asteroid.transform.position = new Vector3(sizeScaleX, _asteroid.transform.position.y);
 		}
 
-		if (_asteroid.transform.position.y > _planeSize.transform.position.y * 2)
+		if (_asteroid.transform.position.y > sizeScaleY)
 		{
-			_asteroid.transform.position = new Vector3(_asteroid.transform.position.x, 0f);
+			_asteroid.transform.position = new Vector3(_asteroid.transform.position.x, -sizeScaleY);
 		}
 
-		if (_asteroid.transform.position.y < 0)
+		if (_asteroid.transform.position.y < -sizeScaleY)
 		{
-			_asteroid.transform.position = new Vector3(_asteroid.transform.position.x, _planeSize.transform.position.y * 2);
+			_asteroid.transform.position = new Vector3(_asteroid.transform.position.x, sizeScaleY);
 		}
 	}
 }

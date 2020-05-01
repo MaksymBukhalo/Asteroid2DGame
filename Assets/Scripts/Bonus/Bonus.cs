@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Bonus : MonoBehaviour
 {
 	[SerializeField] private ListBonus _listBonus;
+	[SerializeField] private Transform _parent;
 
-	private Transform _space;
 	private GameObject _bonus;
 	private RectTransform _planeSize;
 	private TextInformation _timeText;
@@ -31,12 +31,11 @@ public class Bonus : MonoBehaviour
 		DestroyBonus();
 		if (_timePeriodInstantiate == _timeText.Minute)
 		{
-			_planeSize = GameObject.Find("Game(Clone)").GetComponent<RectTransform>();
-			_space = GameObject.Find("Panel").GetComponent<Transform>();
+			_planeSize = GameObject.Find("Space").GetComponent<RectTransform>();
 			float positionXBonus = Random.Range(-(_planeSize.sizeDelta.x / 2), _planeSize.sizeDelta.x / 2);
 			float positionYBonus = Random.Range(-(_planeSize.sizeDelta.y / 2), _planeSize.sizeDelta.y / 2);
-			_bonus = Instantiate(_listBonus.BonusList[Random.Range(0, 2)], _space);
-			_bonus.transform.position = new Vector3(positionXBonus, positionYBonus);
+			_bonus = Instantiate(_listBonus.BonusList[Random.Range(0, 3)], _parent);
+			_bonus.transform.position = new Vector3(positionXBonus, positionYBonus, 0f);
 			AddForceBonus();
 			_timePeriodInstantiate += 2;
 		}

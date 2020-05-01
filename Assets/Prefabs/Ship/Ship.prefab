@@ -110,7 +110,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 40, z: 0}
+  m_Size: {x: 40, y: 40, z: 40}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2884320860718889854
 MonoBehaviour:
@@ -530,10 +530,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2884320860718889843}
     m_Modifications:
+    - target: {fileID: 4044188975534739545, guid: 9ff315ff36e548f4eadc4617656c484b,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1142299893
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044188975534739545, guid: 9ff315ff36e548f4eadc4617656c484b,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044188975534739545, guid: 9ff315ff36e548f4eadc4617656c484b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7520849669382335783, guid: 9ff315ff36e548f4eadc4617656c484b,
         type: 3}
       propertyPath: m_Name
       value: Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520849669382335783, guid: 9ff315ff36e548f4eadc4617656c484b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bakgroung
       objectReference: {fileID: 0}
     - target: {fileID: 8363237208354018700, guid: 9ff315ff36e548f4eadc4617656c484b,
         type: 3}

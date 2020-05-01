@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AddBonus : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class AddBonus : MonoBehaviour
 	[SerializeField] private AudioSource _efectsMusicPlay;
 	[SerializeField] private AudioClip _shipDestroy;
 
-	private Collider _ship;
+	private GameObject _ship;
 	private TextInformation _bonusScoreAndLife;
 	private float _bonusExperetionTime = 30f;
 	private bool _timer = false;
@@ -19,7 +20,6 @@ public class AddBonus : MonoBehaviour
 	private void Start()
 	{
 		_efectsMusicPlay.clip = _addBonus;
-		_ship = GameObject.Find("Ship(Clone)").GetComponent<Collider>();
 		_bonusScoreAndLife = GameObject.Find("TextResult").GetComponent<TextInformation>();
 	}
 
@@ -27,31 +27,31 @@ public class AddBonus : MonoBehaviour
 	{
 		StartTimer();
 	}
+
 	private void OnTriggerEnter(Collider other)
 	{
+		_ship = GameObject.Find("Ship(Clone)");
 		if (other.name == "Shell(Clone)")
 		{
 			Destroy(other.gameObject);
 		}
+
 		if (other.name == "ShieldBonus(Clone)")
 		{
-			EffectsParticale.Play();
-			_efectsMusicPlay.Play();
 			Destroy(other.gameObject);
 			BonusShield();
 		}
-		if (other.name == "KillBonus(Clone)" && GameObject.Find("Ship(Clone)").GetComponent<ShipConrolMove>().ShieldAsteroidsOff)
+
+		if (other.name == "KillBonus(Clone)" && _ship.GetComponent<ShipConrolMove>().ShieldAsteroidsOff)
 		{
-			EffectsParticale.Play();
-			GameObject.Find("Panel").GetComponent<AudioSource>().clip = _shipDestroy;
-			GameObject.Find("Panel").GetComponent<AudioSource>().Play();
+			GameObject.Find("GamePanel(Clone)").GetComponent<AudioSource>().clip = _shipDestroy;
+			GameObject.Find("GamePanel(Clone)").GetComponent<AudioSource>().Play();
 			Destroy(other.gameObject);
 			BonusKill();
 		}
+
 		if (other.name == "SpeedBonus(Clone)")
 		{
-			EffectsParticale.Play();
-			_efectsMusicPlay.Play();
 			Destroy(other.gameObject);
 			BonusSpeed();
 		}
@@ -59,21 +59,30 @@ public class AddBonus : MonoBehaviour
 
 	private void BonusShield()
 	{
+		EffectsParticale.startColor = Color.green;
+		EffectsParticale.Play();
+		_efectsMusicPlay.Play();
 		_bonusScoreAndLife.NumScore += 1000;
-		GameObject.Find("Ship(Clone)").GetComponent<ShipConrolMove>().ShieldAsteroidsOff = false;
+		_ship.GetComponent<ShipConrolMove>().ShieldAsteroidsOff = false;
+		_ship.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0.5f);
 		_timer = true;
 	}
 
 	private void BonusSpeed()
 	{
+		EffectsParticale.startColor = Color.yellow;
+		EffectsParticale.Play();
+		_efectsMusicPlay.Play();
 		_bonusScoreAndLife.NumScore += 1000;
-		GameObject.Find("Ship(Clone)").GetComponent<ShipConrolMove>().SpeedMove = 400f;
+		_ship.GetComponent<ShipConrolMove>().SpeedMove = 400f;
 		_timer = true;
 	}
 
 	private void BonusKill()
 	{
-		Destroy(GameObject.Find("Ship(Clone)"));
+		EffectsParticale.startColor = Color.red;
+		EffectsParticale.Play();
+		Destroy(_ship);
 		_bonusScoreAndLife.LifeShip -= 1;
 		_bonusScoreAndLife.NumScore += 10000;
 	}
@@ -86,8 +95,9 @@ public class AddBonus : MonoBehaviour
 		}
 		else if (_timer)
 		{
-			GameObject.Find("Ship(Clone)").GetComponent<ShipConrolMove>().ShieldAsteroidsOff = true;
-			GameObject.Find("Ship(Clone)").GetComponent<ShipConrolMove>().SpeedMove = 200f;
+			_ship.GetComponent<ShipConrolMove>().ShieldAsteroidsOff = true;
+			_ship.GetComponent<ShipConrolMove>().SpeedMove = 200f;
+			_ship.GetComponent<Image>().color = new Color(255f, 255f, 255f, 255f);
 			_timer = false;
 		}
 	}

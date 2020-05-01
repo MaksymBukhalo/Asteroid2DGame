@@ -14,14 +14,14 @@ public class ShipConrolMove : MonoBehaviour
 
 	private Vector3 _moveVector;
 	private float _z;
-	private Transform _planeSize;
+	private RectTransform _planeSize;
 	private CharacterController _shipConroller;
 
 	private void Start()
 	{
 		_audioShip.clip = _moveShip;
 		_shipConroller = GetComponent<CharacterController>();
-		_planeSize = GameObject.Find("Game(Clone)").GetComponent<Transform>();
+		_planeSize = GameObject.Find("Space").GetComponent<RectTransform>();
 		_audioShip.Play();
 	}
 
@@ -58,24 +58,26 @@ public class ShipConrolMove : MonoBehaviour
 
 	private void TeleportsShipOnLimit()
 	{
-		if (_ship.transform.position.x > _planeSize.transform.position.x * 2)
+		float sizeScaleX = _planeSize.sizeDelta.x / 2;
+		float sizeScaleY = _planeSize.sizeDelta.y / 2;
+		if (_ship.transform.position.x > sizeScaleX)
 		{
-			_ship.transform.position = new Vector3(0f, _ship.transform.position.y);
+			_ship.transform.position = new Vector3(-sizeScaleX, _ship.transform.position.y);
 		}
 
-		if (_ship.transform.position.x < 0)
+		if (_ship.transform.position.x < -sizeScaleX)
 		{
-			_ship.transform.position = new Vector3(_planeSize.transform.position.x * 2, _ship.transform.position.y);
+			_ship.transform.position = new Vector3(sizeScaleX, _ship.transform.position.y);
 		}
 
-		if (_ship.transform.position.y > _planeSize.transform.position.y * 2)
+		if (_ship.transform.position.y > sizeScaleY)
 		{
-			_ship.transform.position = new Vector3(_ship.transform.position.x, 0f);
+			_ship.transform.position = new Vector3(_ship.transform.position.x, -sizeScaleY);
 		}
 
-		if (_ship.transform.position.y < 0)
+		if (_ship.transform.position.y < -sizeScaleY)
 		{
-			_ship.transform.position = new Vector3(_ship.transform.position.x, _planeSize.transform.position.y * 2);
+			_ship.transform.position = new Vector3(_ship.transform.position.x, sizeScaleY);
 		}
 	}
 }

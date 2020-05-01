@@ -5,8 +5,8 @@ using UnityEngine;
 public class CreateAsteroid : MonoBehaviour
 {
 	[SerializeField] private ListAsteroid _asteroids;
-
-	private Transform _space;
+	
+	private Transform _parent;
 	private RectTransform _planeSize;
 	private int _amoutAsteroids;
 
@@ -19,7 +19,7 @@ public class CreateAsteroid : MonoBehaviour
 	{
 		if (!GameObject.Find("Asteroid(Clone)"))
 		{
-			_space = GameObject.Find("Panel").GetComponent<Transform>();
+			_parent = GameObject.Find("Game").GetComponent<Transform>();
 			NewSizeAsterods(75f);
 			InstantiateAsteroids();
 		}
@@ -31,22 +31,22 @@ public class CreateAsteroid : MonoBehaviour
 		{
 			if (i < _amoutAsteroids / 2)
 			{
-				_planeSize = GameObject.Find("Game(Clone)").GetComponent<RectTransform>();
+				_planeSize = GameObject.Find("Space").GetComponent<RectTransform>();
 				float positionYAsteroid = Random.Range(-(_planeSize.sizeDelta.y / 2), _planeSize.sizeDelta.y / 2);
 				GameObject asteroid = _asteroids.AsteroidList[Random.Range(0, 5)];
 				asteroid.transform.position = new Vector3(_planeSize.sizeDelta.x / 2, positionYAsteroid);
 				asteroid.name = "Asteroid";
-				Instantiate(asteroid, _space);
+				Instantiate(asteroid, _parent);
 			}
 
 			if (i > _amoutAsteroids / 2)
 			{
-				_planeSize = GameObject.Find("Game(Clone)").GetComponent<RectTransform>();
+				_planeSize = GameObject.Find("Space").GetComponent<RectTransform>();
 				float positionXAsteroid = Random.Range(-(_planeSize.sizeDelta.x / 2), _planeSize.sizeDelta.x / 2);
 				GameObject asteroid = _asteroids.AsteroidList[Random.Range(0, 5)];
 				asteroid.transform.position = new Vector3(positionXAsteroid, _planeSize.sizeDelta.y / 2);
 				asteroid.name = "Asteroid";
-				Instantiate(asteroid, _space);
+				Instantiate(asteroid, _parent);
 			}
 		}
 	}

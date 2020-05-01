@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ClashShipAndAsteroid : MonoBehaviour
 {
-	public GameObject asteroid;
-
 	[SerializeField] private ListAsteroid _asteroids;
 	[SerializeField] private AudioClip _asteroidDestroy;
 	[SerializeField] private AudioClip _shipDestroy;
@@ -17,22 +15,21 @@ public class ClashShipAndAsteroid : MonoBehaviour
 	private RectTransform _asteroidSize;
 	private int _amoutAsteroids;
 	private TextInformation _asteroidScoreAndLife;
-	private bool _instatiateShip;
+	private bool _findShip;
 
 	private void Start()
 	{
-		_space = GameObject.Find("Panel").GetComponent<Transform>();
-		_audioAsteroids = GameObject.Find("Panel").GetComponent<AudioSource>();
+		_space = GameObject.Find("Game").GetComponent<Transform>();
+		_audioAsteroids = GameObject.Find("Space").GetComponent<AudioSource>();
 		_asteroidScoreAndLife = GameObject.Find("TextResult").GetComponent<TextInformation>();
 		_amoutAsteroids = Random.Range(2, 4);
 		_asteroidSize = transform.GetComponent<RectTransform>();
-		InstantiateShip();
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		InstantiateShip();
-		if (_instatiateShip)
+		FindShip();
+		if (_findShip)
 		{
 
 			if (other == _ship && GameObject.Find("Ship(Clone)").GetComponent<ShipConrolMove>().ShieldAsteroidsOff)
@@ -54,15 +51,15 @@ public class ClashShipAndAsteroid : MonoBehaviour
 
 	}
 
-	private void InstantiateShip()
+	private void FindShip()
 	{
 		if (!GameObject.Find("Ship(Clone)"))
 		{
-			_instatiateShip = false;
+			_findShip = false;
 		}
 		else
 		{
-			_instatiateShip = true;
+			_findShip = true;
 			_ship = GameObject.Find("Ship(Clone)").GetComponent<Collider>();
 		}
 	}
@@ -101,7 +98,7 @@ public class ClashShipAndAsteroid : MonoBehaviour
 		for (int i = 0; i < 6; i++)
 		{
 			_asteroids.AsteroidList[i].GetComponent<RectTransform>().sizeDelta = new Vector3(newSize, newSize);
-			_asteroids.AsteroidList[i].GetComponent<BoxCollider>().size = new Vector3(newSize, newSize);
+			_asteroids.AsteroidList[i].GetComponent<BoxCollider>().size = new Vector3(newSize, newSize,newSize);
 		}
 	}
 

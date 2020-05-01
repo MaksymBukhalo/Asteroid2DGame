@@ -12,7 +12,7 @@ public class ShellConrollMove : MonoBehaviour
 
 	void Start()
 	{
-		_planeSize = GameObject.Find("Game(Clone)").GetComponent<RectTransform>();
+		_planeSize = GameObject.Find("Space").GetComponent<RectTransform>();
 		_startLife = Time.time;
 	}
 
@@ -24,24 +24,26 @@ public class ShellConrollMove : MonoBehaviour
 
 	private void TeleportsAsteroidOnLimit()
 	{
-		if (_shell.transform.position.x > _planeSize.transform.position.x * 2)
+		float sizeScaleX = _planeSize.sizeDelta.x / 2;
+		float sizeScaleY = _planeSize.sizeDelta.y / 2;
+		if (_shell.transform.position.x > sizeScaleX)
 		{
-			_shell.transform.position = new Vector3(0f, _shell.transform.position.y);
+			_shell.transform.position = new Vector3(-sizeScaleX, _shell.transform.position.y);
 		}
 
-		if (_shell.transform.position.x < 0)
+		if (_shell.transform.position.x < -sizeScaleX)
 		{
-			_shell.transform.position = new Vector3(_planeSize.transform.position.x * 2, _shell.transform.position.y);
+			_shell.transform.position = new Vector3(sizeScaleX, _shell.transform.position.y);
 		}
 
-		if (_shell.transform.position.y > _planeSize.transform.position.y * 2)
+		if (_shell.transform.position.y > sizeScaleY)
 		{
-			_shell.transform.position = new Vector3(_shell.transform.position.x, 0f);
+			_shell.transform.position = new Vector3(_shell.transform.position.x, -sizeScaleY);
 		}
 
-		if (_shell.transform.position.y < 0)
+		if (_shell.transform.position.y < -sizeScaleY)
 		{
-			_shell.transform.position = new Vector3(_shell.transform.position.x, _planeSize.transform.position.y * 2);
+			_shell.transform.position = new Vector3(_shell.transform.position.x, sizeScaleY);
 		}
 
 	}

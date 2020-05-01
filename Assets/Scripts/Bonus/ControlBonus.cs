@@ -10,7 +10,7 @@ public class ControlBonus : MonoBehaviour
 
 	void Start()
 	{
-		_planeSize = GameObject.Find("Game(Clone)").GetComponent<RectTransform>();
+		_planeSize = GameObject.Find("Space").GetComponent<RectTransform>();
 	}
 
 	private void Update()
@@ -20,24 +20,26 @@ public class ControlBonus : MonoBehaviour
 
 	private void TeleportsBonusOnLimit()
 	{
-		if (_bonus.transform.position.x > _planeSize.transform.position.x * 2)
+		float sizeScaleX = _planeSize.sizeDelta.x / 2;
+		float sizeScaleY = _planeSize.sizeDelta.y / 2;
+		if (_bonus.transform.position.x > sizeScaleX)
 		{
-			_bonus.transform.position = new Vector3(0f, _bonus.transform.position.y);
+			_bonus.transform.position = new Vector3(-sizeScaleX, _bonus.transform.position.y);
 		}
 
-		if (_bonus.transform.position.x < 0)
+		if (_bonus.transform.position.x < -sizeScaleX)
 		{
-			_bonus.transform.position = new Vector3(_planeSize.transform.position.x * 2, _bonus.transform.position.y);
+			_bonus.transform.position = new Vector3(sizeScaleX, _bonus.transform.position.y);
 		}
 
-		if (_bonus.transform.position.y > _planeSize.transform.position.y * 2)
+		if (_bonus.transform.position.y > sizeScaleY)
 		{
-			_bonus.transform.position = new Vector3(_bonus.transform.position.x, 0f);
+			_bonus.transform.position = new Vector3(_bonus.transform.position.x, -sizeScaleY);
 		}
 
-		if (_bonus.transform.position.y < 0)
+		if (_bonus.transform.position.y < -sizeScaleY)
 		{
-			_bonus.transform.position = new Vector3(_bonus.transform.position.x, _planeSize.transform.position.y * 2);
+			_bonus.transform.position = new Vector3(_bonus.transform.position.x, sizeScaleY);
 		}
 	}
 }

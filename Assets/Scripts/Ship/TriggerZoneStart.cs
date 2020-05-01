@@ -8,7 +8,7 @@ public class TriggerZoneStart : MonoBehaviour
 
 	private void Start()
 	{
-		GameObject.Find("Panel").GetComponent<InstatiateShip>();
+		GameObject.Find("GamePanel(Clone)").GetComponent<InstatiateShip>();
 	}
 
 	private void OnTriggerStay(Collider other)
