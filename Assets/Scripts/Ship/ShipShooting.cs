@@ -10,7 +10,7 @@ public class ShipShooting : MonoBehaviour
 	[SerializeField] private AudioClip _clipShoot;
 	[SerializeField] private AudioSource _audioShoot;
 
-	private float _startSpeed = 150f;
+	private float _startSpeed = 200f;
 	private Transform _plane;
 	private float _pauseBetweenShoots = 0.1f;
 	private float _shootTime;
@@ -18,7 +18,7 @@ public class ShipShooting : MonoBehaviour
 	private void Start()
 	{
 		_audioShoot.clip = _clipShoot;
-		_plane = GameObject.Find("GamePanel(Clone)").GetComponent<Transform>();
+		_plane = GameObject.Find("Game").GetComponent<Transform>();
 		_shootTime = Time.time;
 	}
 

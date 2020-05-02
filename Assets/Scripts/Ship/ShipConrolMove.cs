@@ -58,8 +58,8 @@ public class ShipConrolMove : MonoBehaviour
 
 	private void TeleportsShipOnLimit()
 	{
-		float sizeScaleX = _planeSize.sizeDelta.x / 2;
-		float sizeScaleY = _planeSize.sizeDelta.y / 2;
+		float sizeScaleX = _planeSize.sizeDelta.x / 2 * _planeSize.transform.localScale.x;
+		float sizeScaleY = _planeSize.sizeDelta.y / 2 * _planeSize.transform.localScale.y;
 		if (_ship.transform.position.x > sizeScaleX)
 		{
 			_ship.transform.position = new Vector3(-sizeScaleX, _ship.transform.position.y);

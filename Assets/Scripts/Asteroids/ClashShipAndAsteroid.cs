@@ -44,8 +44,8 @@ public class ClashShipAndAsteroid : MonoBehaviour
 		{
 			_audioAsteroids.clip = _asteroidDestroy;
 			_audioAsteroids.Play();
-			Destroy(other.gameObject);
 			CreateAsteroidsAfterDestroy();
+			Destroy(other.gameObject);
 			Destroy(gameObject);
 		}
 
@@ -108,8 +108,8 @@ public class ClashShipAndAsteroid : MonoBehaviour
 		{
 			GameObject newAsteroid = _asteroids.AsteroidList[i];
 			newAsteroid.name = "Asteroid";
-			newAsteroid = Instantiate(newAsteroid, _space);
-			newAsteroid.transform.position = transform.position;
+			GameObject newAsteroidPosition = Instantiate(newAsteroid, _space);
+			newAsteroidPosition.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 		}
 	}
 

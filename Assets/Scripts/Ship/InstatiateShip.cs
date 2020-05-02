@@ -24,7 +24,7 @@ public class InstatiateShip : MonoBehaviour
 		if (_life.LifeShip > 0 && GameObject.Find("Ship(Clone)") == false && GameObject.Find("ZoneStart").GetComponent<TriggerZoneStart>().ZoneStart)
 		{
 			GameObject newShip = Instantiate(_ship, _parent);
-			newShip.transform.position = new Vector3(0f, 0f, -1f);
+			newShip.transform.position = new Vector3(0f, 0f, 0f);
 		}
 	}
 

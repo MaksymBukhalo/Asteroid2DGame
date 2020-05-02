@@ -30,8 +30,8 @@ public class AsteroidControlMove : MonoBehaviour
 
 	private void TeleportsAsteroidOnLimit()
 	{
-		float sizeScaleX = _planeSize.sizeDelta.x / 2;
-		float sizeScaleY = _planeSize.sizeDelta.y / 2;
+		float sizeScaleX = _planeSize.sizeDelta.x / 2 * _planeSize.transform.localScale.x;
+		float sizeScaleY = _planeSize.sizeDelta.y / 2 * _planeSize.transform.localScale.y;
 		if (_asteroid.transform.position.x > sizeScaleX)
 		{
 			_asteroid.transform.position = new Vector3(-sizeScaleX, _asteroid.transform.position.y);

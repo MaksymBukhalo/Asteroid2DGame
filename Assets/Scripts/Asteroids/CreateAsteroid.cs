@@ -56,7 +56,7 @@ public class CreateAsteroid : MonoBehaviour
 		for (int i = 0; i < 6; i++)
 		{
 			_asteroids.AsteroidList[i].GetComponent<RectTransform>().sizeDelta = new Vector3(newSize, newSize);
-			_asteroids.AsteroidList[i].GetComponent<BoxCollider>().size = new Vector3(newSize, newSize);
+			_asteroids.AsteroidList[i].GetComponent<BoxCollider>().size = new Vector3(newSize, newSize,newSize);
 		}
 	}
 

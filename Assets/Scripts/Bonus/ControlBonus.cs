@@ -20,8 +20,8 @@ public class ControlBonus : MonoBehaviour
 
 	private void TeleportsBonusOnLimit()
 	{
-		float sizeScaleX = _planeSize.sizeDelta.x / 2;
-		float sizeScaleY = _planeSize.sizeDelta.y / 2;
+		float sizeScaleX = _planeSize.sizeDelta.x / 2 * _planeSize.transform.localScale.x;
+		float sizeScaleY = _planeSize.sizeDelta.y / 2 * _planeSize.transform.localScale.y;
 		if (_bonus.transform.position.x > sizeScaleX)
 		{
 			_bonus.transform.position = new Vector3(-sizeScaleX, _bonus.transform.position.y);

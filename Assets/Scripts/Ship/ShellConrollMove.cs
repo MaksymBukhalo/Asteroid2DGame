@@ -24,8 +24,8 @@ public class ShellConrollMove : MonoBehaviour
 
 	private void TeleportsAsteroidOnLimit()
 	{
-		float sizeScaleX = _planeSize.sizeDelta.x / 2;
-		float sizeScaleY = _planeSize.sizeDelta.y / 2;
+		float sizeScaleX = _planeSize.sizeDelta.x / 2 * _planeSize.localScale.x;
+		float sizeScaleY = _planeSize.sizeDelta.y / 2 * _planeSize.localScale.y;
 		if (_shell.transform.position.x > sizeScaleX)
 		{
 			_shell.transform.position = new Vector3(-sizeScaleX, _shell.transform.position.y);
